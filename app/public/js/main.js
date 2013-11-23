@@ -2,10 +2,6 @@
 (function (){
   'use strict';
 
-  function log() {
-    console.log(arguments);
-  }
-
   $(function() {
 
     // ----------------------------------------
@@ -16,7 +12,7 @@
         primus = Primus.connect(PRIMUS_URL);
 
     primus.on('open', function open() {
-      log('Connection open');
+      console.log('Connection open');
 
       // Set up color picker
       $('#color-picker').colorpicker()
@@ -32,24 +28,24 @@
     });
 
     primus.on('reconnect', function () {
-      log('Reconnect attempt started');
+      console.log('Reconnect attempt started');
     });
 
     primus.on('reconnecting', function (opts) {
-      log('Reconnecting in %d ms', opts.timeout);
-      log('This is attempt %d out of %d', opts.attempt, opts.retries);
+      console.log('Reconnecting in %d ms', opts.timeout);
+      console.log('This is attempt %d out of %d', opts.attempt, opts.retries);
     });
 
     primus.on('end', function () {
-      log('Connection closed');
+      console.log('Connection closed');
     });
 
     primus.on('data', function message(rawData) {
-      log(rawData);
+      console.log(rawData);
       if (rawData) {
         var accel = rawData["accelerometer"];
         if (accel) {
-          log(accel);
+          console.log(accel);
         }
       }
     });
@@ -59,7 +55,6 @@
     // ----------------------------------------
 
     window.app = {
-      log: log
     };
   });
 
