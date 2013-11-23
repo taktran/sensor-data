@@ -41,9 +41,15 @@ To enable the hardware features
 
         node bin/hardware-server.js
 
+### Test scripts
+
 To start the RGB lights demo
 
     node bin/rbg-lights.js
+
+To start the accelerometer demo
+
+    node bin/accelerometer.js
 
 ## Testing
 
