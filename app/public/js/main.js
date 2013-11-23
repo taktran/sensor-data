@@ -4,9 +4,6 @@
 
   $(function() {
 
-    // Set up color picker
-    $('#color-picker').colorpicker();
-
     // ----------------------------------------
     // Web sockets server
     // ----------------------------------------
@@ -16,6 +13,14 @@
 
     primus.on('open', function open() {
       console.log('Connection open');
+
+      // Set up color picker
+      $('#color-picker').colorpicker()
+        .on('changeColor', function(ev){
+          var color = ev.color.toHex();
+          primus.write(color);
+        });
+
     });
 
     primus.on('error', function error(err) {
