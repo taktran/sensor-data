@@ -6,7 +6,7 @@
   var PRESSURE_SENSOR_INDEX = 0;
 
   $(function() {
-    var sensorData = [ [{x:0, y:0}] ];
+    var sensorData = [[]];
     var timeCounter = 0;
     var graph;
 
@@ -14,7 +14,18 @@
     // Set up graphs
     // ----------------------------------------
 
+    var initSensorData = function() {
+      for (var i = 0; i <= PRESSURE_SENSOR_THRESHOLD; i++) {
+        sensorData[PRESSURE_SENSOR_INDEX].push({
+          x: timeCounter++,
+          y: 1
+        });
+      }
+    };
+
     var initGraph = function() {
+      initSensorData();
+
       var palette = new Rickshaw.Color.Palette({
         scheme: 'colorwheel'
       });
