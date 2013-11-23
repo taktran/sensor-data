@@ -9,7 +9,9 @@ var NORMALIZED_MIN = 0,
     LIGHT_SENSOR_MAX = 1015,
 
     PRESSURE_SENSOR_MIN = 50,
-    PRESSURE_SENSOR_MAX = 1023;
+    PRESSURE_SENSOR_MAX = 1023,
+
+    ACCELEROMETER_THRESHOLD = 0.01;
 
 var five = require("johnny-five");
 var Sensor = require("./lib/Sensor");
@@ -51,6 +53,13 @@ board.on("ready", function() {
   // Pressure sensor
   var pressureSensor = new Sensor("A4", board);
 
+  // Accelerometer
+  var accel = new five.Accelerometer({
+    pins: ["A0", "A1", "A2"],
+    freq: 100,
+    threshold: ACCELEROMETER_THRESHOLD
+  });
+
   // --------------------------------------------
   // Real time connection
   // --------------------------------------------
@@ -73,21 +82,21 @@ board.on("ready", function() {
     });
 
     // Send light data
-    photoResistor.on("read", function(value) {
-      var normVal = inRange(value, LIGHT_SENSOR_MIN, LIGHT_SENSOR_MAX, NORMALIZED_MIN, NORMALIZED_MAX);
-      var data = {
-        lightVal: normVal
-      };
+    // photoResistor.on("read", function(value) {
+    //   var normVal = inRange(value, LIGHT_SENSOR_MIN, LIGHT_SENSOR_MAX, NORMALIZED_MIN, NORMALIZED_MAX);
+    //   var data = {
+    //     lightVal: normVal
+    //   };
 
-      // console.log("light:", normVal, "(", value, ")");
-      if (normVal < 0.5) {
-        data.lowLight = true;
-      } else {
-        data.lowLight = false;
-      }
+    //   // console.log("light:", normVal, "(", value, ")");
+    //   if (normVal < 0.5) {
+    //     data.lowLight = true;
+    //   } else {
+    //     data.lowLight = false;
+    //   }
 
-      spark.write(JSON.stringify(data));
-    });
+    //   spark.write(JSON.stringify(data));
+    // });
 
     // Send pressue sensor data
     pressureSensor.on("read", function(value) {
@@ -105,6 +114,15 @@ board.on("ready", function() {
       }
 
       spark.write(JSON.stringify(data));
+    });
+
+    // Send accelerometer data
+    accel.on("axischange", function(err, data) {
+      var output = {
+        accelerometer: data.smooth
+      };
+      console.log(output);
+      spark.write(JSON.stringify(output));
     });
   });
 
