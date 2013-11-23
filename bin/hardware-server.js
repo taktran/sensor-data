@@ -11,7 +11,7 @@ var NORMALIZED_MIN = 0,
     PRESSURE_SENSOR_MIN = 50,
     PRESSURE_SENSOR_MAX = 1023,
 
-    ACCELEROMETER_THRESHOLD = 0.01;
+    ACCELEROMETER_THRESHOLD = 0.001;
 
 var five = require("johnny-five");
 var Sensor = require("./lib/Sensor");
@@ -106,7 +106,6 @@ board.on("ready", function() {
         pressure: {
           value: normVal
         }
-
       };
 
       //
@@ -124,7 +123,7 @@ board.on("ready", function() {
       var output = {
         accelerometer: data.smooth
       };
-      console.log(output);
+      // console.log(output);
       spark.write(JSON.stringify(output));
     });
   });
