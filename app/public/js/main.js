@@ -195,12 +195,11 @@
             y: accel["z"][0] * -100
           });
 
-          if (accelData.length > SENSOR_THRESHOLD) {
+          if (accelData["x"].length > SENSOR_THRESHOLD) {
             accelData["x"].shift();
             accelData["y"].shift();
             accelData["z"].shift();
           }
-
           accelerometerGraph.update();
         }
 
