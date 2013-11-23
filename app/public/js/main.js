@@ -3,20 +3,20 @@
   'use strict';
 
   $(function() {
+    var seriesData = [ [] ];
 
     // ----------------------------------------
     // Set up graphs
     // ----------------------------------------
 
     var initGraph = function() {
-      var seriesData = [ [] ];
-      var random = new Rickshaw.Fixtures.RandomData(150);
+      var random = new Rickshaw.Fixtures.RandomData(5);
 
-      for (var i = 0; i < 150; i++) {
+      for (var i = 0; i < 5; i++) {
         random.addData(seriesData);
       }
       var palette = new Rickshaw.Color.Palette({
-        scheme: 'classic9'
+        scheme: 'colorwheel'
       });
 
       var graph = new Rickshaw.Graph({
@@ -121,6 +121,7 @@
     // ----------------------------------------
 
     window.app = {
+      seriesData: seriesData
     };
   });
 

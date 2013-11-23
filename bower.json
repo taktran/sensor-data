@@ -12,6 +12,7 @@
     "jquery": "~1.10.x",
     "mjaalnir-bootstrap-colorpicker": "*",
     "rickshaw": "~1.4.5",
-    "d3": "~3.3.10"
+    "d3": "~3.3.10",
+    "underscore": "~1.5.2"
   }
 }
