@@ -1,8 +1,68 @@
-/*global Primus*/
+/*global Primus, Rickshaw */
 (function (){
   'use strict';
 
   $(function() {
+
+    // ----------------------------------------
+    // Set up graphs
+    // ----------------------------------------
+
+    var initGraph = function() {
+      var seriesData = [ [], [], [], [], [], [], [], [], [] ];
+      var random = new Rickshaw.Fixtures.RandomData(150);
+
+      for (var i = 0; i < 150; i++) {
+        random.addData(seriesData);
+      }
+      var palette = new Rickshaw.Color.Palette({
+        scheme: 'classic9'
+      });
+
+      var graph = new Rickshaw.Graph({
+        element: document.getElementById("graph"),
+        width: 470,
+        height: 300,
+        renderer: 'line',
+        stroke: true,
+        preserve: true,
+        series: [
+          {
+            color: palette.color(),
+            data: seriesData[0],
+            name: 'x-axis'
+          }
+        ]
+      });
+
+      graph.render();
+
+      var ticksTreatment = 'glow';
+
+      var xAxis = new Rickshaw.Graph.Axis.Time({
+        graph: graph,
+        ticksTreatment: ticksTreatment,
+        timeFixture: new Rickshaw.Fixtures.Time.Local()
+      });
+
+      xAxis.render();
+
+      var yAxis = new Rickshaw.Graph.Axis.Y({
+        graph: graph,
+        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+        ticksTreatment: ticksTreatment
+      });
+
+      yAxis.render();
+
+      setInterval(function() {
+        random.removeData(seriesData);
+        random.addData(seriesData);
+        graph.update();
+      }, 500);
+    };
+
+    initGraph();
 
     // ----------------------------------------
     // Web sockets server
