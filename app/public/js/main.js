@@ -6,7 +6,12 @@
 
   $(function() {
     var sensorData = {
-      pressure: []
+      pressure: [],
+      accelerometer: {
+        x: [],
+        y: [],
+        z: []
+      }
     };
     var timeCounter = 0;
     var graph;
@@ -24,7 +29,7 @@
       }
     };
 
-    var initGraph = function() {
+    var initPressureGraph = function() {
       initSensorData();
 
       var palette = new Rickshaw.Color.Palette({
@@ -68,7 +73,7 @@
       yAxis.render();
     };
 
-    initGraph();
+    initPressureGraph();
 
     // ----------------------------------------
     // Web sockets server
