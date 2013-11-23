@@ -46,12 +46,12 @@
       if (data) {
         var accel = data["accelerometer"];
         if (accel) {
-          console.table(accel);
+          // console.table(accel);
         }
 
         var pressure = data["pressure"];
         if (pressure) {
-          console.log(pressure);
+          // console.log(pressure);
         }
       }
     });

@@ -10,6 +10,8 @@
   "dependencies": {
     "bootstrap": "https://github.com/twbs/bootstrap/archive/3.0.0-wip.zip",
     "jquery": "~1.10.x",
-    "mjaalnir-bootstrap-colorpicker": "*"
+    "mjaalnir-bootstrap-colorpicker": "*",
+    "rickshaw": "~1.4.5",
+    "d3": "~3.3.10"
   }
 }
