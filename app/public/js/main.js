@@ -9,7 +9,7 @@
     // ----------------------------------------
 
     var initGraph = function() {
-      var seriesData = [ [], [], [], [], [], [], [], [], [] ];
+      var seriesData = [ [] ];
       var random = new Rickshaw.Fixtures.RandomData(150);
 
       for (var i = 0; i < 150; i++) {
