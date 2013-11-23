@@ -19,7 +19,7 @@ board.on("ready", function() {
   accel = new five.Accelerometer({
     pins: [ "A0", "A1", "A2" ],
     freq: 100,
-    threshold: 0.2
+    threshold: 0.01
   });
 
   // Accelerometer Event API
@@ -30,16 +30,14 @@ board.on("ready", function() {
   // Defaults to 500ms
   //
   accel.on("acceleration", function( err, data ) {
-
-    console.log( "acceleration", data.smooth );
+    // console.log( "acceleration", data.smooth );
   });
 
   // "axischange"
   //
   // Fires only when X, Y or Z has changed
   //
-  accel.on("axischange", function( err, timestamp ) {
-
-    console.log( "axischange", this.raw );
+  accel.on("axischange", function( err, data ) {
+    console.log( "axischange", data.smooth );
   });
 });
