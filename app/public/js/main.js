@@ -2,24 +2,24 @@
 (function (){
   'use strict';
 
+  var PRESSURE_SENSOR_THRESHOLD = 100;
+  var PRESSURE_SENSOR_INDEX = 0;
+
   $(function() {
-    var seriesData = [ [] ];
+    var sensorData = [ [{x:0, y:0}] ];
+    var timeCounter = 0;
+    var graph;
 
     // ----------------------------------------
     // Set up graphs
     // ----------------------------------------
 
     var initGraph = function() {
-      var random = new Rickshaw.Fixtures.RandomData(5);
-
-      for (var i = 0; i < 5; i++) {
-        random.addData(seriesData);
-      }
       var palette = new Rickshaw.Color.Palette({
         scheme: 'colorwheel'
       });
 
-      var graph = new Rickshaw.Graph({
+      graph = new Rickshaw.Graph({
         element: document.getElementById("graph"),
         width: 470,
         height: 300,
@@ -29,7 +29,7 @@
         series: [
           {
             color: palette.color(),
-            data: seriesData[0],
+            data: sensorData[0],
             name: 'x-axis'
           }
         ]
@@ -54,12 +54,6 @@
       });
 
       yAxis.render();
-
-      setInterval(function() {
-        random.removeData(seriesData);
-        random.addData(seriesData);
-        graph.update();
-      }, 500);
     };
 
     initGraph();
@@ -111,7 +105,18 @@
 
         var pressure = data["pressure"];
         if (pressure) {
-          // console.log(pressure);
+          var pressureData = sensorData[PRESSURE_SENSOR_INDEX];
+
+          pressureData.push({
+            x: timeCounter++,
+            y: pressure.value
+          });
+
+          if (pressureData.length > PRESSURE_SENSOR_THRESHOLD) {
+            pressureData.shift();
+          }
+
+          graph.update();
         }
       }
     });
@@ -121,7 +126,7 @@
     // ----------------------------------------
 
     window.app = {
-      seriesData: seriesData
+      sensorData: sensorData
     };
   });
 
