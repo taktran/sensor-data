@@ -103,14 +103,17 @@ board.on("ready", function() {
       var normVal = inRange(value, PRESSURE_SENSOR_MIN, PRESSURE_SENSOR_MAX, NORMALIZED_MIN, NORMALIZED_MAX);
 
       var data = {
-        pressVal: normVal
+        pressure: {
+          value: normVal
+        }
+
       };
 
       //
       if (normVal < 0.3) {
-        data.hardPress = true;
+        data.pressure.hardPress = true;
       } else {
-        data.hardPress = false;
+        data.pressure.hardPress = false;
       }
 
       spark.write(JSON.stringify(data));

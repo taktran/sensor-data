@@ -41,11 +41,17 @@
     });
 
     primus.on('data', function message(rawData) {
-      console.log(rawData);
-      if (rawData) {
-        var accel = rawData["accelerometer"];
+      var data = JSON.parse(rawData);
+
+      if (data) {
+        var accel = data["accelerometer"];
         if (accel) {
-          console.log(accel);
+          console.table(accel);
+        }
+
+        var pressure = data["pressure"];
+        if (pressure) {
+          console.log(pressure);
         }
       }
     });
