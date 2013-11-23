@@ -1,8 +1,9 @@
+@import url(../vendor/mjaalnir-bootstrap-colorpicker/css/bootstrap-colorpicker.css);
 body {
-  padding-top: 50px;
-}
+  padding-top: 50px; }
+  body > .container {
+    margin-top: 30px; }
 
 .starter-template {
   padding: 40px 15px;
-  text-align: center;
-}
+  text-align: center; }

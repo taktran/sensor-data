@@ -14,10 +14,22 @@ body {
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
-  position: relative;
-  z-index: 15;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
 }
 
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.navbar-wrapper .navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
 
 /* CUSTOMIZE THE CAROUSEL
@@ -25,10 +37,8 @@ body {
 
 /* Carousel base class */
 .carousel {
+  height: 500px;
   margin-bottom: 60px;
-
-  /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-  margin-top: -90px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -38,6 +48,7 @@ body {
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 500px;
+  background-color: #777;
 }
 .carousel-inner > .item > img {
   position: absolute;
@@ -93,7 +104,7 @@ body {
 
 @media (min-width: 768px) {
 
-  /* Remve the edge padding needed for mobile */
+  /* Remove the edge padding needed for mobile */
   .marketing {
     padding-left: 0;
     padding-right: 0;
@@ -103,6 +114,15 @@ body {
   .navbar-wrapper {
     margin-top: 20px;
   }
+  .navbar-wrapper .container {
+    padding-left:  15px;
+    padding-right: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-left:  0;
+    padding-right: 0;
+  }
+
   /* The navbar becomes detached from the top, so we round the corners */
   .navbar-wrapper .navbar {
     border-radius: 4px;

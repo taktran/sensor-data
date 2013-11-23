@@ -13,7 +13,9 @@
   border-top:   @caret-width-base solid @dropdown-caret-color;
   border-right: @caret-width-base solid transparent;
   border-left:  @caret-width-base solid transparent;
-  content: "";
+  // Firefox fix for https://github.com/twbs/bootstrap/issues/9538. Once fixed,
+  // we can just straight up remove this.
+  border-bottom: 0 dotted;
 }
 
 // The dropdown wrapper (div)
@@ -161,8 +163,10 @@
 .navbar-fixed-bottom .dropdown {
   // Reverse the caret
   .caret {
-    border-top: 0;
-    border-bottom: 4px solid @dropdown-caret-color;
+    // Firefox fix for https://github.com/twbs/bootstrap/issues/9538. Once this
+    // gets fixed, restore `border-top: 0;`.
+    border-top: 0 dotted;
+    border-bottom: @caret-width-base solid @dropdown-caret-color;
     content: "";
   }
   // Different positioning for bottom up menu
@@ -172,3 +176,17 @@
     margin-bottom: 1px;
   }
 }
+
+
+// Component alignment
+//
+// Reiterate per navbar.less and the modified component alignment there.
+
+@media (min-width: @grid-float-breakpoint) {
+  .navbar-right {
+    .dropdown-menu {
+      .pull-right > .dropdown-menu();
+    }
+  }
+}
+
