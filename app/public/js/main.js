@@ -3,10 +3,11 @@
   'use strict';
 
   var PRESSURE_SENSOR_THRESHOLD = 100;
-  var PRESSURE_SENSOR_INDEX = 0;
 
   $(function() {
-    var sensorData = [[]];
+    var sensorData = {
+      pressure: []
+    };
     var timeCounter = 0;
     var graph;
 
@@ -16,7 +17,7 @@
 
     var initSensorData = function() {
       for (var i = 0; i <= PRESSURE_SENSOR_THRESHOLD; i++) {
-        sensorData[PRESSURE_SENSOR_INDEX].push({
+        sensorData["pressure"].push({
           x: timeCounter++,
           y: 1
         });
@@ -40,7 +41,7 @@
         series: [
           {
             color: palette.color(),
-            data: sensorData[0],
+            data: sensorData["pressure"],
             name: 'x-axis'
           }
         ]
@@ -116,7 +117,7 @@
 
         var pressure = data["pressure"];
         if (pressure) {
-          var pressureData = sensorData[PRESSURE_SENSOR_INDEX];
+          var pressureData = sensorData["pressure"];
 
           pressureData.push({
             x: timeCounter++,
