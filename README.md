@@ -1,4 +1,6 @@
-# East Poultry Ave
+# Sensor data
+
+Visualisation of sensor data in the browser.
 
 Hack for the the Insanity Hack day 23/11/2013 at East Poultry Ave.
 
